@@ -1,0 +1,23 @@
+# color settings
+color cursor default magenta
+
+
+# bind settings
+bind status + !git commit --amend
+bind status S @git stash
+
+bind refs P !?git push origin %(ref)
+bind refs L !?git pull origin %(ref)
+bind refs D !?git branch -d %(ref)
+bind refs E !git branch -m %(ref) %(prompt)
+bind refs N !git checkout -b %(prompt)
+bind refs M !git checkout master
+bind refs B !?git rebase %(ref)
+
+bind main B !?git rebase -i %(commit)
+bind main E !git rebase --continue
+
+bind diff B !?git rebase -i %(commit)
+
+bind stash A !?git stash apply %(stash)
+bind stash D !?git stash drop %(stash)
