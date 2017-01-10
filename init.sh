@@ -23,6 +23,6 @@ for dotfile in .??*; do
     continue
   fi
 
-  echo "ln -s $DOTPATH/$dotfile ~/$dotfile"
-  ln -s $DOTPATH/$dotfile ~/$dotfile
+  echo "ln -fs $DOTPATH/$dotfile ~/$dotfile"
+  ln -fs $DOTPATH/$dotfile ~/$dotfile
 done
