@@ -52,7 +52,7 @@ endif
 set undofile
 set undodir=~/.vim/undo
 
-let mapleader = ','
+let g:mapleader = ','
 noremap \ ,
 
 cnoremap <C-a> <Home>
