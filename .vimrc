@@ -28,6 +28,7 @@ set hlsearch
 set nrformats=bin,hex
 set virtualedit=block
 set ambiwidth=double
+set backspace=indent,eol,start
 set lazyredraw
 set wildmenu
 set wildmode=longest:full,full
