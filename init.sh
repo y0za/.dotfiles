@@ -16,13 +16,14 @@ match_list() {
   return 1
 }
 
-IGNORE_FILES=('.git' '.gitignore' '.DS_Store')
+IGNORE_FILES=('.gitignore' 'README.md' 'init.sh')
 
-for dotfile in .??*; do
+for dotfile in `git ls-files --full-name`; do
   if match_list $dotfile ${IGNORE_FILES[@]}; then
     continue
   fi
 
+  mkdir -p $(dirname ~/$dotfile)
   echo "ln -fs $DOTPATH/$dotfile ~/$dotfile"
   ln -fs $DOTPATH/$dotfile ~/$dotfile
 done
