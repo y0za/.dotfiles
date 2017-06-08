@@ -9,6 +9,7 @@ Plug 'cohama/lexima.vim'
 Plug 'fatih/vim-go'
 Plug 'haya14busa/incsearch.vim'
 Plug 'w0ng/vim-hybrid'
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
