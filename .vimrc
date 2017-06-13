@@ -13,6 +13,7 @@ Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
+syntax on
 filetype plugin indent on
 colorscheme hybrid
 
@@ -62,5 +63,3 @@ cnoremap <C-e> <End>
 cnoremap <C-h> <BS>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
-
-syntax on
