@@ -35,7 +35,7 @@ set lazyredraw
 set wildmenu
 set wildmode=longest:full,full
 set laststatus=2
-set statusline=%m%f%=%y[%l/%L]
+set statusline=%m%f%=%y
 
 if !isdirectory(expand('~/.vim/backup'))
   call mkdir(expand('~/.vim/backup'), 'p')
