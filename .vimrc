@@ -37,6 +37,9 @@ set wildmenu
 set wildmode=longest:full,full
 set laststatus=2
 set statusline=%m%f%=%y
+set expandtab
+set tabstop=2
+set shiftwidth=2
 
 if !isdirectory(expand('~/.vim/backup'))
   call mkdir(expand('~/.vim/backup'), 'p')
