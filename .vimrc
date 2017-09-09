@@ -11,6 +11,8 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'leafgarland/typescript-vim'
 Plug 'jparise/vim-graphql'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
 
 call plug#end()
 
