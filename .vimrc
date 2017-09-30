@@ -42,6 +42,7 @@ set statusline=%m%f%=%y
 set expandtab
 set tabstop=2
 set shiftwidth=2
+set grepprg=jvgrep
 
 if !isdirectory(expand('~/.vim/backup'))
   call mkdir(expand('~/.vim/backup'), 'p')
