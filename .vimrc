@@ -3,8 +3,6 @@ scriptencoding utf-8
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
 Plug 'cohama/lexima.vim'
 Plug 'fatih/vim-go'
 Plug 'haya14busa/incsearch.vim'
