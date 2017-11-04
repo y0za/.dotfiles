@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'cohama/lexima.vim'
 Plug 'fatih/vim-go'
-Plug 'haya14busa/incsearch.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'leafgarland/typescript-vim'
 Plug 'jparise/vim-graphql'
