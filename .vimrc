@@ -5,17 +5,16 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'cohama/lexima.vim'
 Plug 'fatih/vim-go'
-Plug 'w0ng/vim-hybrid'
 Plug 'leafgarland/typescript-vim'
 Plug 'jparise/vim-graphql'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
 syntax on
 filetype plugin indent on
-colorscheme hybrid
 
 set background=dark
 set nonumber
@@ -41,6 +40,7 @@ set tabstop=2
 set shiftwidth=2
 set grepprg=jvgrep
 
+colorscheme PaperColor
 if !isdirectory(expand('~/.vim/backup'))
   call mkdir(expand('~/.vim/backup'), 'p')
 endif
