@@ -16,6 +16,8 @@ bind refs B !?git rebase %(ref)
 
 bind main B !?git rebase -i %(commit)
 bind main E !git rebase --continue
+bind main U !?git commit --fixup %(commit)
+bind main T !?git rebase -i --autosquash %(commit)
 
 bind diff B !?git rebase -i %(commit)
 
