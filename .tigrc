@@ -1,6 +1,14 @@
+# system settings
+set line-graphics = utf-8
+set ignore-case = true
+set refresh-mode = auto
+set diff-options = -m --first-parent
+set main-view = date:custom,format="%Y-%m-%d %H:%M",local \
+                author:width=8 \
+                commit-title:yes,graph,refs
+
 # color settings
 color cursor default magenta
-
 
 # bind settings
 bind status + !git commit --amend
