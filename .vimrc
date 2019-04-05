@@ -100,12 +100,12 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss Prettier
 
 let g:go_def_mapping_enabled = 0
 
-if executable('bingo')
+if executable('gopls')
   augroup LspGo
     au!
     autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'bingo',
-          \ 'cmd': {server_info->['bingo', '-mode', 'stdio']},
+          \ 'name': 'go-lang',
+          \ 'cmd': {server_info->['gopls']},
           \ 'whitelist': ['go'],
           \ })
     autocmd FileType go setlocal omnifunc=lsp#complete
