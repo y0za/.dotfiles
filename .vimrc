@@ -3,9 +3,7 @@ scriptencoding utf-8
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'cohama/lexima.vim'
-Plug 'fatih/vim-go'
-Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'jparise/vim-graphql'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
@@ -14,14 +12,8 @@ Plug 'thinca/vim-qfreplace'
 Plug 'posva/vim-vue'
 Plug 'junegunn/vim-easy-align'
 Plug 'w0ng/vim-hybrid'
-Plug 'prettier/vim-prettier'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'ryanolsonx/vim-lsp-typescript'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'previm/previm'
 
 call plug#end()
 
@@ -53,6 +45,9 @@ set shiftwidth=2
 set grepprg=jvgrep
 set splitbelow
 set splitright
+set shortmess-=S
+set nostartofline
+set signcolumn=number
 
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
@@ -63,6 +58,7 @@ if !isdirectory(expand('~/.vim/backup'))
 endif
 set backup
 set backupdir=~/.vim/backup
+set backupcopy=yes
 
 if !isdirectory(expand('~/.vim/swap'))
   call mkdir(expand('~/.vim/swap'), 'p')
@@ -85,50 +81,60 @@ cnoremap <C-h> <BS>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 
-vmap <Leader><CR> <Plug>(reading_vimrc-update_clipboard)
-
-map <C-j> <Plug>(edgemotion-j)
-map <C-k> <Plug>(edgemotion-k)
-
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 let g:javascript_plugin_flow = 1
 
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss Prettier
+let g:previm_open_cmd = 'open -a Google\ Chrome'
 
-let g:go_def_mapping_enabled = 0
+" coc.nvim
 
-if executable('gopls')
-  augroup LspGo
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'go-lang',
-          \ 'cmd': {server_info->['gopls']},
-          \ 'whitelist': ['go'],
-          \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
-    autocmd FileType go nmap gd <plug>(lsp-definition)
-  augroup END
-endif
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-if executable('flow-language-server')
-  augroup LspFlow
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'flow',
-          \ 'cmd': {server_info->['flow-language-server', '--stdio']},
-          \ 'whitelist': ['javascript'],
-          \ })
-    autocmd FileType javascript setlocal omnifunc=lsp#complete
-  augroup END
-endif
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-if executable('typescript-language-server')
-  augroup LspTypescript
-    au!
-    autocmd FileType typescript setlocal omnifunc=lsp#complete
-    autocmd FileType typescript nmap gd <plug>(lsp-definition)
-  augroup END
-endif
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList actions<cr>
+" Show all diagnostics
+nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
